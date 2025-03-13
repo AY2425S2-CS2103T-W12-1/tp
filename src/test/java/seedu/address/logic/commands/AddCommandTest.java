@@ -6,14 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalTenants.ALICE;
-
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
-
 import org.junit.jupiter.api.Test;
-
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
@@ -50,7 +47,8 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON,
+                () -> addCommand.execute(modelStub));
     }
 
     @Test
@@ -119,7 +117,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addPerson(Tenant person) {
+        public void addTenant(Tenant person) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -134,27 +132,27 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Tenant person) {
+        public boolean hasTenant(Tenant person) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deletePerson(Tenant target) {
+        public void deleteTenant(Tenant target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setPerson(Tenant target, Tenant editedPerson) {
+        public void setTenant(Tenant target, Tenant editedPerson) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Tenant> getFilteredPersonList() {
+        public ObservableList<Tenant> getFilteredTenantList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Tenant> predicate) {
+        public void updateFilteredTenantList(Predicate<Tenant> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -171,7 +169,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Tenant person) {
+        public boolean hasTenant(Tenant person) {
             requireNonNull(person);
             return this.person.isSamePerson(person);
         }
@@ -184,13 +182,13 @@ public class AddCommandTest {
         final ArrayList<Tenant> personsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Tenant person) {
+        public boolean hasTenant(Tenant person) {
             requireNonNull(person);
             return personsAdded.stream().anyMatch(person::isSamePerson);
         }
 
         @Override
-        public void addPerson(Tenant person) {
+        public void addTenant(Tenant person) {
             requireNonNull(person);
             personsAdded.add(person);
         }

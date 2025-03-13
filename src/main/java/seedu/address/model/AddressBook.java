@@ -19,16 +19,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid
      * duplication between constructors. See
-     * https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
-     * Note that non-static init blocks are not recommended to use. There are other ways to avoid
-     * duplication among constructors.
+     * https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html Note that non-static init
+     * blocks are not recommended to use. There are other ways to avoid duplication among
+     * constructors.
      */
     {
         persons = new UniqueTenantList();
     }
 
-    public AddressBook() {
-    }
+    public AddressBook() {}
 
     /**
      * Creates an AddressBook using the Persons in the {@code toBeCopied}
@@ -89,7 +88,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Removes {@code key} from this {@code AddressBook}. {@code key} must exist in the address
      * book.
      */
-    public void removePerson(Tenant key) {
+    public void removeTenant(Tenant key) {
         persons.remove(key);
     }
 

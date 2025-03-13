@@ -2,11 +2,9 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
 import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
-
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
@@ -21,7 +19,7 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Tenant> filteredPersons;
+    private final FilteredList<Tenant> filteredTenant;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,7 +32,7 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredTenant = new FilteredList<>(this.addressBook.getPersonList());
     }
 
     public ModelManager() {
@@ -91,27 +89,27 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Tenant person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
+    public boolean hasTenant(Tenant tenant) {
+        requireNonNull(tenant);
+        return addressBook.hasPerson(tenant);
     }
 
     @Override
-    public void deletePerson(Tenant target) {
-        addressBook.removePerson(target);
+    public void deleteTenant(Tenant target) {
+        addressBook.removeTenant(target);
     }
 
     @Override
-    public void addPerson(Tenant person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void addTenant(Tenant tenant) {
+        addressBook.addPerson(tenant);
+        updateFilteredTenantList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
-    public void setPerson(Tenant target, Tenant editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public void setTenant(Tenant target, Tenant editedTenant) {
+        requireAllNonNull(target, editedTenant);
 
-        addressBook.setPerson(target, editedPerson);
+        addressBook.setPerson(target, editedTenant);
     }
 
     // =========== Filtered Person List Accessors
@@ -122,14 +120,14 @@ public class ModelManager implements Model {
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Tenant> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Tenant> getFilteredTenantList() {
+        return filteredTenant;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Tenant> predicate) {
+    public void updateFilteredTenantList(Predicate<Tenant> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredTenant.setPredicate(predicate);
     }
 
     @Override
@@ -146,7 +144,7 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredTenant.equals(otherModelManager.filteredTenant);
     }
 
 }

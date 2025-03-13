@@ -2,7 +2,6 @@ package seedu.address.model;
 
 import java.nio.file.Path;
 import java.util.function.Predicate;
-
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.tenant.Tenant;
@@ -59,34 +58,34 @@ public interface Model {
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
-    boolean hasPerson(Tenant person);
+    boolean hasTenant(Tenant person);
 
     /**
      * Deletes the given person. The person must exist in the address book.
      */
-    void deletePerson(Tenant target);
+    void deleteTenant(Tenant target);
 
     /**
      * Adds the given person. {@code person} must not already exist in the address book.
      */
-    void addPerson(Tenant person);
+    void addTenant(Tenant person);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}. {@code target} must exist
      * in the address book. The person identity of {@code editedPerson} must not be the same as
      * another existing person in the address book.
      */
-    void setPerson(Tenant target, Tenant editedPerson);
+    void setTenant(Tenant target, Tenant editedTenant);
 
     /**
      * Returns an unmodifiable view of the filtered person list
      */
-    ObservableList<Tenant> getFilteredPersonList();
+    ObservableList<Tenant> getFilteredTenantList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      *
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Tenant> predicate);
+    void updateFilteredTenantList(Predicate<Tenant> predicate);
 }

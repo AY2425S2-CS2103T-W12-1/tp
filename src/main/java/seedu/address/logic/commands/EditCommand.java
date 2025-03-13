@@ -4,11 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
@@ -32,10 +30,10 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) " + "[" + PREFIX_NAME + "NAME] "
             + /*
-     * "[" + PREFIX_PHONE + "PHONE] " + "[" + PREFIX_EMAIL + "EMAIL] " +
-     */ "[" + PREFIX_ADDRESS + "ADDRESS] "
+               * "[" + PREFIX_PHONE + "PHONE] " + "[" + PREFIX_EMAIL + "EMAIL] " +
+               */ "[" + PREFIX_ADDRESS + "ADDRESS] "
             + /* "[" + PREFIX_TAG + "TAG]...\n" + */"Example: " + COMMAND_WORD + " 1 "
-            /* + PREFIX_PHONE + "91234567 " + PREFIX_EMAIL + "johndoe@example.com" */;
+    /* + PREFIX_PHONE + "91234567 " + PREFIX_EMAIL + "johndoe@example.com" */;
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -46,7 +44,7 @@ public class EditCommand extends Command {
     private final EditTenantDescriptor editTenantDescriptor;
 
     /**
-     * @param index                of the person in the filtered person list to edit
+     * @param index of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
     public EditCommand(Index index, EditTenantDescriptor editPersonDescriptor) {
@@ -60,7 +58,7 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Tenant> lastShownList = model.getFilteredPersonList();
+        List<Tenant> lastShownList = model.getFilteredTenantList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -69,12 +67,12 @@ public class EditCommand extends Command {
         Tenant tenantToEdit = lastShownList.get(index.getZeroBased());
         Tenant editedTenant = createEditedPerson(tenantToEdit, editTenantDescriptor);
 
-        if (!tenantToEdit.isSamePerson(editedTenant) && model.hasPerson(editedTenant)) {
+        if (!tenantToEdit.isSamePerson(editedTenant) && model.hasTenant(editedTenant)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.setPerson(tenantToEdit, editedTenant);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.setTenant(tenantToEdit, editedTenant);
+        model.updateFilteredTenantList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(
                 String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedTenant)));
     }
@@ -84,7 +82,7 @@ public class EditCommand extends Command {
      * {@code editPersonDescriptor}.
      */
     private static Tenant createEditedPerson(Tenant personToEdit,
-                                             EditTenantDescriptor editPersonDescriptor) {
+            EditTenantDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
@@ -131,8 +129,7 @@ public class EditCommand extends Command {
         private Address address;
         // private Set<Tag> tags;
 
-        public EditTenantDescriptor() {
-        }
+        public EditTenantDescriptor() {}
 
         /**
          * Copy constructor. A defensive copy of {@code tags} is used internally.
