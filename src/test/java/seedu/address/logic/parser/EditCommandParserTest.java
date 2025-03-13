@@ -9,7 +9,6 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
@@ -18,7 +17,6 @@ import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 // import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 // import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 // import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 // import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -39,11 +37,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditTenantDescriptor;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.tenant.Address;
-import seedu.address.model.tenant.Email;
 import seedu.address.model.tenant.Name;
-import seedu.address.model.tenant.Phone;
 import seedu.address.testutil.EditTenantDescriptorBuilder;
 
 public class EditCommandParserTest {

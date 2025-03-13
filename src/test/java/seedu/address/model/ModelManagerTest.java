@@ -7,10 +7,13 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalTenants.ALICE;
 import static seedu.address.testutil.TypicalTenants.BENSON;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.tenant.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
@@ -85,11 +88,12 @@ public class ModelManagerTest {
         assertTrue(modelManager.hasTenant(ALICE));
     }
 
+    // @formatter:off
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class,
-                () -> modelManager.getFilteredTenantList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredTenantList().remove(0));
     }
+    // @formatter:on
 
     @Test
     public void equals() {
